@@ -1,9 +1,8 @@
-import { React , useState,useEffect } from 'react'
+import React from 'react'
+import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
-import { BsFillSunFill, BsMoonFill, BsCheck } from 'react-icons/bs';
-
 
 const navigation = [
     { name: 'Home', to: '/' },
@@ -12,49 +11,14 @@ const navigation = [
     { name: 'Contact', to: '/' },
   ]
   
-
-  
-
-function Nav() {
+function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [theme, setTheme] = useState('light');
-
-    // if local storage is empty save theme as light
-    useEffect(() => {
-      if (localStorage.getItem('theme') === null) {
-        localStorage.setItem('theme', 'light');
-      }
-    }, []);
-  
-    useEffect(() => {
-      // select html elem
-      const html = document.querySelector('html');
-      if (localStorage.getItem('theme') === 'dark') {
-        html.classList.add('dark');
-        setTheme('dark');
-      } else {
-        html.classList.remove('dark');
-        setTheme('light');
-      }
-    }, [theme]);
-  
-    // handle switch theme
-    const handleThemeSwitch = () => {
-      if (localStorage.getItem('theme') === 'light') {
-        setTheme('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        setTheme('light');
-        localStorage.setItem('theme', 'light');
-      }
-    };
-
 
   return (
-    <div className="bg-white dark:bg-black">
+    <div className="bg-white">
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8 dark:text-white " aria-label="Global">
-          <div className="flex lg:flex-1">
+        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div className="flex lg:flex-1 lg:justify-end">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
@@ -74,26 +38,11 @@ function Nav() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="hidden lg:flex lg:gap-x-12  ">
-            {navigation.map((item) => (
-              <Link to={item.to} key={item.name}  className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200 ">
-                {item.name}
-              </Link>
-            ))}
-          </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <div>
-          <button
-            onClick={handleThemeSwitch}
-            className='p-3  text-black dark:text-white rounded-full w-12 h-6 flex justify-center items-center'
-          >
-            {theme === 'light' ? <BsMoonFill /> : <BsFillSunFill />}
-          </button>
-          </div>
-            <Link to="/Login" className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200">
-              Log in 
+          {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link to="/Login" className="text-sm font-semibold leading-6 text-gray-900">
+              Log in <span aria-hidden="true">&rarr;</span>
             </Link>
-          </div>
+          </div> */}
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className="fixed inset-0 z-50" />
@@ -144,4 +93,4 @@ function Nav() {
   )
 }
 
-export default Nav
+export default Navbar

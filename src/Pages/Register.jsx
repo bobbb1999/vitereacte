@@ -1,5 +1,6 @@
 import React from 'react'
 import Registration from '../Components/Registration'
+// import Navbar from '../Components/Navbar'
 import Nav from '../Components/Nav'
 
 function Register() {
